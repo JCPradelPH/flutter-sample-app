@@ -5,11 +5,12 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'components/ab_popup_menu.dart';
+import 'screens/home/home_screen.dart';
 import 'utils/ab_menu_adapter.dart';
 
-void main() => runApp(new HomePageContainer());
+void main() => runApp(new MainContainer());
 
-class HomePageContainer extends StatelessWidget{
+class MainContainer extends StatelessWidget{
   
   @override
   Widget build(BuildContext context) {
@@ -18,38 +19,38 @@ class HomePageContainer extends StatelessWidget{
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: new HomePage(title: 'MPA Devel'),
+      home: new MainPage(title: 'MPA Devel'),
     );
   }
 }
 
-class HomePage extends StatefulWidget{
+class MainPage extends StatefulWidget{
 
   final String title;
 
-  final menuList = const <MenuAdpater>[
-    const MenuAdpater(
+  final menuList = const <MenuAdapter>[
+    const MenuAdapter(
       title: 'Login with Facebook', 
       icon: FontAwesomeIcons.facebookSquare,
       iconColor: const Color.fromRGBO(0,91,171, 1.0),
       actionId: 0,
       flag: false
     ),
-    const MenuAdpater(
+    const MenuAdapter(
       title: 'Sign In with Google', 
       icon: FontAwesomeIcons.googlePlusSquare,
       iconColor: const Color.fromRGBO(200,50,0, 1.0),
       actionId: 1,
       flag: false
     ),
-    const MenuAdpater(
+    const MenuAdapter(
       title: 'Email Login', 
       icon: FontAwesomeIcons.envelopeSquare,
       iconColor: const Color.fromRGBO(150,150,50, 1.0),
       actionId: 2,
       flag: false
     ),
-    const MenuAdpater(
+    const MenuAdapter(
       title: 'My Profile', 
       icon: FontAwesomeIcons.userCircle,
       iconColor: const Color.fromRGBO(150,150,50, 1.0),
@@ -65,23 +66,18 @@ class HomePage extends StatefulWidget{
   final FacebookLogin facebookSignIn = new FacebookLogin();
   final _auth = FirebaseAuth.instance;
 
-  HomePage({Key key, this.title}) : super(key: key);
+  MainPage({Key key, this.title}) : super(key: key);
 
   @override
   _State createState() => new _State();
 }
 
-class _State extends State<HomePage>{
+class _State extends State<MainPage>{
 
-  Widget _bodyContent = new Column(
-    children: [
-      new Text('Hello'),
-      new Text('World')
-    ]
-  );
+  Widget _bodyContent = new HomeScreen();
   
   bool _isLoggedIn = false;
-  FirebaseUser _authUser = null;
+  FirebaseUser _authUser;
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +95,7 @@ class _State extends State<HomePage>{
     );
   }
 
-  _onSelect(MenuAdpater menuItem) {
+  _onSelect(MenuAdapter menuItem) {
     switch(menuItem.actionId){
       case 0:// Login via Facebook
         _handleFacebookLogin()

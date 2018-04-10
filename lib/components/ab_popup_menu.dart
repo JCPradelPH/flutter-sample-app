@@ -5,23 +5,23 @@ import './button_icon.dart';
 
 class ABPopUpMenu extends StatelessWidget{
 
-  dynamic onSelect;
-  List<MenuAdpater> _choices;
+  final dynamic onSelect;
+  final List<MenuAdapter> _choices;
 
   ABPopUpMenu(this._choices,{this.onSelect});
 
   @override
   Widget build(BuildContext context) {
-    return new PopupMenuButton<MenuAdpater>(
+    return new PopupMenuButton<MenuAdapter>(
       onSelected: onSelect,
       itemBuilder: _menuChoices,
     );
   }
 
-  List<PopupMenuEntry<MenuAdpater>> _menuChoices(BuildContext context) {
+  List<PopupMenuEntry<MenuAdapter>> _menuChoices(BuildContext context) {
     return _choices
       .map( (choice) {
-        return new PopupMenuItem<MenuAdpater>(
+        return new PopupMenuItem<MenuAdapter>(
           value: choice,
           child: _menuItems(choice),
         );
