@@ -28,6 +28,8 @@ dev_dependencies:
 flutter:
   assets:
     - json_data/movies.json
+    - graphics/log-icon-dk.png
+    - graphics/loader.gif
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

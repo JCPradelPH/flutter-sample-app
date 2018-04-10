@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'components/ab_popup_menu.dart';
 import 'screens/home/home_screen.dart';
+import 'screens/user_profile/profile.dart';
 import 'utils/ab_menu_adapter.dart';
 
 void main() => runApp(new MainContainer());
@@ -105,6 +106,7 @@ class _State extends State<MainPage>{
             print("-----------------------------------------");
             _authUser = data;
             _isLoggedIn=true; 
+            _navigateToProfile();
           } ) )
           .catchError( (err) => print('err $err') );
       break;
@@ -116,6 +118,7 @@ class _State extends State<MainPage>{
             print("-----------------------------------------");
             _isLoggedIn=true;
             _authUser = data;
+            _navigateToProfile();
           } ) )
           .catchError( (err) => print('err $err') );
       break;
@@ -123,11 +126,11 @@ class _State extends State<MainPage>{
         // show login via email page
       break;
       case 3:// My Profile
-        setState( (){ _isLoggedIn=false; } );
+        _navigateToProfile();
       break;
     }
   }
-
+  
   _handleGoogleSignIn() async {
     GoogleSignInAccount user = widget._googleSignIn.currentUser;
     if (user == null) user = await widget._googleSignIn.signInSilently();
@@ -152,7 +155,6 @@ class _State extends State<MainPage>{
     }
     return user;
   }
-
 
   _handleFacebookLogin() async{
     final FacebookLoginResult result =
@@ -183,5 +185,12 @@ class _State extends State<MainPage>{
             'Here\'s the error Facebook gave us: ${result.errorMessage}');
         break;
     }
+  }
+
+  _navigateToProfile(){
+    Navigator.push(
+      context,
+      new MaterialPageRoute(builder: (context) => new Profile(_authUser)),
+    );
   }
 }
