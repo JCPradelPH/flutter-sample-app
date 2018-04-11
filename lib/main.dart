@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:map_view/map_view.dart';
 
 import 'components/ab_popup_menu.dart';
 import 'components/shared_components.dart';
@@ -62,11 +61,11 @@ class MainPage extends StatefulWidget{
       flag: true
     ),
     const MenuAdapter(
-      title: 'My Location', 
-      icon: FontAwesomeIcons.car,
+      title: 'Map', 
+      icon: FontAwesomeIcons.mapMarker,
       iconColor: const Color.fromRGBO(150,150,50, 1.0),
       actionId: 4,
-      flag: true
+      flag: false
     ),
   ];
 
@@ -120,7 +119,9 @@ class _State extends State<MainPage>{
         _navigateToProfile();
       break;
       case 4:// My Profile
-        _navigateToMaps();
+        setState((){ _isLoading=false; });
+        Location initialPos = new Location(12.8797, 121.7740);
+        LocationMap.show(initialPos);
       break;
     }
   }
@@ -152,14 +153,6 @@ class _State extends State<MainPage>{
     Navigator.push(
       context,
       new MaterialPageRoute(builder: (context) => new Profile(_authUser)),
-    );
-  }
-  
-  _navigateToMaps(){
-    setState((){ _isLoading=false; });
-    Navigator.push(
-      context,
-      new MaterialPageRoute(builder: (context) => new LocationMap()),
     );
   }
 

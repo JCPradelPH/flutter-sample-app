@@ -20,9 +20,9 @@ class MenuAdapter {
   final bool flag;
   final dynamic actionId;
   final Image listImage;
-  final Text listTitle;
-  final Text subTitle1;
-  final Text subTitle2;
-  final Text subTitle3;
+  final String listTitle;
+  final String subTitle1;
+  final String subTitle2;
+  final String subTitle3;
   final VoidCallback tapEvent;
 }

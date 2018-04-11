@@ -42,7 +42,7 @@ class _State extends State<HomePage>{
       loader(),
     );
   }
-  
+
   Future<String> _fetchMovies() async {
     return await rootBundle.loadString('json_data/movies.json');
   }
@@ -56,25 +56,21 @@ class _State extends State<HomePage>{
       .then( (data) {
         Map<String,dynamic> movieMap = json.decode(data);
         List<dynamic> movies = movieMap['movies'];
-        print('------------no container');
         movies.forEach(_mapMovies);
       } )
       .catchError( (err) => print('error: $err') );
   }
   _mapMovies(mov) async {
     Image img = await _fetchImage(mov['posters']['thumbnail']);
-    print('------------Fetched IMage');
-    print(img);
     setState( () {
-      print('------------setState');
       _movieList.add(
           new MenuAdapter(
             listImage:img,
-            listTitle: new Text(mov['title'], style: new TextStyle(fontSize: 15.0,fontWeight: FontWeight.bold)),
-            subTitle1: new Text(mov['year'].toString()),
-            subTitle2: new Text('Rated '+mov['mpaa_rating']),
-            subTitle3: new Text('Score: '+mov['ratings']['audience_score'].toString()),
-            tapEvent: () => print("Clicked!")
+            listTitle: mov['title'],
+            subTitle1: mov['year'].toString(),
+            subTitle2: 'Rated '+mov['mpaa_rating'],
+            subTitle3: 'Score: '+mov['ratings']['audience_score'].toString(),
+            tapEvent: () => generateSnackbar(context, new Text(mov['title']))
           )
         );
     } ); 

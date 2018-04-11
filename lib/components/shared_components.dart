@@ -14,16 +14,24 @@ Widget mpWrapper(
     child: c
   );
 
-  Widget loader() => new Center(
-    child: new Center(
-      child: new Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          mpWrapper(new CircularProgressIndicator(),margin:const EdgeInsets.only(right:20.0)),
-          new Text("Loading"),
-        ],
-      ),
+Widget loader() => new Center(
+  child: new Center(
+    child: new Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        mpWrapper(new CircularProgressIndicator(),margin:const EdgeInsets.only(right:20.0)),
+        new Text("Loading"),
+      ],
     ),
-  );
+  ),
+);
 
+generateSnackbar(context,content){
+  Scaffold.of(context)
+    .showSnackBar(
+      new SnackBar(
+        content: content
+      )
+    );
+}
   
