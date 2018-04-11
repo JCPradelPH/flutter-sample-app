@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './dimension_wrapper.dart';
+import './shared_components.dart';
 
 class ButtonIcon extends StatelessWidget{
 

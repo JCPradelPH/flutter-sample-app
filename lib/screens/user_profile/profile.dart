@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../../components/shared_components.dart';
+
 class Profile extends StatelessWidget {
 
   final FirebaseUser authUser;
@@ -14,11 +16,21 @@ class Profile extends StatelessWidget {
         title: new Text("My Profile"),
       ),
       body: new Center(
-        child: new RaisedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: new Text('Go back!'),
+        child: new Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            mpWrapper(
+              new CircleAvatar(
+                backgroundImage: new NetworkImage(authUser.photoUrl),
+                radius:50.0
+              ),
+              margin: const EdgeInsets.only(bottom:10.0)
+            ),
+            new Text(authUser.displayName, style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0)),
+            new Text(authUser.email)
+          ],
         ),
       ),
     );

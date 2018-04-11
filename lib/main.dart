@@ -5,14 +5,17 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'components/ab_popup_menu.dart';
+import 'components/shared_components.dart';
 import 'screens/home/home_screen.dart';
+import 'screens/map/map.dart';
 import 'screens/user_profile/profile.dart';
 import 'utils/ab_menu_adapter.dart';
+import 'utils/social_media_auth.dart';
 
 void main() => runApp(new MainContainer());
 
-class MainContainer extends StatelessWidget{
   
+class MainContainer extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
@@ -58,14 +61,15 @@ class MainPage extends StatefulWidget{
       actionId: 3,
       flag: true
     ),
+    const MenuAdapter(
+      title: 'My Location', 
+      icon: FontAwesomeIcons.car,
+      iconColor: const Color.fromRGBO(150,150,50, 1.0),
+      actionId: 4,
+      flag: true
+    ),
   ];
 
-  final _googleSignIn = new GoogleSignIn(scopes: [
-    'email',
-    'https://www.googleapis.com/auth/contacts.readonly',
-  ]);
-  final FacebookLogin facebookSignIn = new FacebookLogin();
-  final _auth = FirebaseAuth.instance;
 
   MainPage({Key key, this.title}) : super(key: key);
 
@@ -77,9 +81,13 @@ class _State extends State<MainPage>{
 
   Widget _bodyContent = new HomeScreen();
   
-  bool _isLoggedIn = false;
+  bool _isLoggedIn = false, _isLoading = false;
   FirebaseUser _authUser;
-
+  @override
+  void initState() {
+    super.initState();
+    
+  }
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -92,35 +100,18 @@ class _State extends State<MainPage>{
           )
         ]
       ),
-      body: _bodyContent,
+      body: _isLoading ? loader() : _bodyContent
     );
   }
-
+  
   _onSelect(MenuAdapter menuItem) {
+    setState((){ _isLoading=true; });
     switch(menuItem.actionId){
       case 0:// Login via Facebook
-        _handleFacebookLogin()
-          .then( (data) => setState( (){ 
-            print("Facebook-----------------------------------------");
-            print(data);
-            print("-----------------------------------------");
-            _authUser = data;
-            _isLoggedIn=true; 
-            _navigateToProfile();
-          } ) )
-          .catchError( (err) => print('err $err') );
+        _handleFacebookLogin();
       break;
       case 1:// SignIn Via Google
-        _handleGoogleSignIn()
-          .then( (data) => setState( (){
-            print("Google-----------------------------------------");
-            print(data);
-            print("-----------------------------------------");
-            _isLoggedIn=true;
-            _authUser = data;
-            _navigateToProfile();
-          } ) )
-          .catchError( (err) => print('err $err') );
+        _handleGoogleSignIn();
       break;
       case 2:// Login via Email
         // show login via email page
@@ -128,64 +119,34 @@ class _State extends State<MainPage>{
       case 3:// My Profile
         _navigateToProfile();
       break;
+      case 4:// My Profile
+        _navigateToMaps();
+      break;
     }
   }
-  
+
   _handleGoogleSignIn() async {
-    GoogleSignInAccount user = widget._googleSignIn.currentUser;
-    if (user == null) user = await widget._googleSignIn.signInSilently();
-    if (user == null) {
-      final GoogleSignInAccount googleUser = await widget._googleSignIn.signIn();
-      final GoogleSignInAuthentication googleAuth =
-      await googleUser.authentication;
-      final FirebaseUser user = await widget._auth.signInWithGoogle(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
-      print("Google-----------------------------------------");
-      print(user);
-      print("-----------------------------------------");
-      assert(user.email != null);
-      assert(user.displayName != null);
-      assert(!user.isAnonymous);
-      assert(await user.getIdToken() != null);
-
-      final FirebaseUser currentUser = await widget._auth.currentUser();
-      assert(user.uid == currentUser.uid);
-    }
-    return user;
+    SocialMediaAuth.execGoogleSignIn()
+      .then( _onLoginSuccess )
+      .catchError( _errCatcher );
   }
 
-  _handleFacebookLogin() async{
-    final FacebookLoginResult result =
-      await widget.facebookSignIn.logInWithReadPermissions(['email']);
-    switch (result.status) {
-      case FacebookLoginStatus.loggedIn:
-        final FacebookAccessToken accessToken = result.accessToken;
-        final FirebaseUser user = await widget._auth.signInWithFacebook(
-          accessToken: accessToken.token
-        );
-        print("Facebook-----------------------------------------");
-        print(user);
-        print("-----------------------------------------");
-        assert(user.email != null);
-        assert(user.displayName != null);
-        assert(!user.isAnonymous);
-        assert(await user.getIdToken() != null);
-
-        final FirebaseUser currentUser = await widget._auth.currentUser();
-        assert(user.uid == currentUser.uid);
-        return user;
-        break;
-      case FacebookLoginStatus.cancelledByUser:
-        print('Login cancelled by the user.');
-        break;
-      case FacebookLoginStatus.error:
-        print('Something went wrong with the login process.\n'
-            'Here\'s the error Facebook gave us: ${result.errorMessage}');
-        break;
-    }
+  _handleFacebookLogin(){
+    SocialMediaAuth.execFacebookLogin()
+      .then( _onLoginSuccess  )
+      .catchError( _errCatcher );
   }
+
+  _onLoginSuccess(data){
+    _setLoggedInState(data);
+    _navigateToProfile();
+  }
+
+  _setLoggedInState(data) => setState((){ 
+    _authUser = data;
+    _isLoading=false; 
+    _isLoggedIn=true; 
+  });
 
   _navigateToProfile(){
     Navigator.push(
@@ -193,4 +154,14 @@ class _State extends State<MainPage>{
       new MaterialPageRoute(builder: (context) => new Profile(_authUser)),
     );
   }
+  
+  _navigateToMaps(){
+    setState((){ _isLoading=false; });
+    Navigator.push(
+      context,
+      new MaterialPageRoute(builder: (context) => new LocationMap()),
+    );
+  }
+
+  _errCatcher(err) => print('error: $err');
 }

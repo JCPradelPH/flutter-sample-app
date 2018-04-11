@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
+import '../../components/shared_components.dart';
 import '../../utils/ab_menu_adapter.dart';
 import '../../components/listview.dart';
 
@@ -38,18 +39,10 @@ class _State extends State<HomePage>{
     return new Container(
       child: _movieList.length>0?
       new Listview(_movieList):
-      new Center(
-        child:  new DecoratedBox(
-          decoration: new BoxDecoration(
-            image: new DecorationImage(
-              image: new AssetImage('graphics/loader.gif'),
-            ),
-          )
-        ),
-      ),
+      loader(),
     );
   }
-
+  
   Future<String> _fetchMovies() async {
     return await rootBundle.loadString('json_data/movies.json');
   }
