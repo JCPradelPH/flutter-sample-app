@@ -5,13 +5,17 @@ import 'package:map_view/map_view.dart';
 
 import 'components/ab_popup_menu.dart';
 import 'components/shared_components.dart';
-import 'screens/home/home_screen.dart';
-import 'screens/map/map.dart';
-import 'screens/user_profile/profile.dart';
-import 'utils/ab_menu_adapter.dart';
+import 'containers/map/map.dart';
+import 'containers/screens/movies/movies_list.dart';
+import 'containers/screens/users/users_list.dart';
+import 'containers/user_profile/profile.dart';
+import 'utils/global_adapter.dart';
+import 'utils/push_notif_service.dart';
 import 'utils/social_media_auth.dart';
 
-void main() => runApp(new MainContainer());
+void main(){
+  runApp(new MainContainer());
+}
 
   
 class MainContainer extends StatelessWidget{
@@ -65,11 +69,26 @@ class MainPage extends StatefulWidget{
       icon: FontAwesomeIcons.mapMarker,
       iconColor: const Color.fromRGBO(150,150,50, 1.0),
       actionId: 4,
-      flag: false
+      alwaysOn: true
+    ),
+    const MenuAdapter(
+      title: 'Movies', 
+      icon: FontAwesomeIcons.camera,
+      iconColor: const Color.fromRGBO(150,150,50, 1.0),
+      actionId: 5,
+      alwaysOn: true
+    ),
+    const MenuAdapter(
+      title: 'Contacts', 
+      icon: FontAwesomeIcons.list,
+      iconColor: const Color.fromRGBO(150,150,50, 1.0),
+      actionId: 6,
+      alwaysOn: true
     ),
   ];
 
-
+  
+  
   MainPage({Key key, this.title}) : super(key: key);
 
   @override
@@ -78,15 +97,20 @@ class MainPage extends StatefulWidget{
 
 class _State extends State<MainPage>{
 
-  Widget _bodyContent = new HomeScreen();
+  Widget _bodyContent = new MoviesList();
+  // Widget _bodyContent = new UsersList();
   
   bool _isLoggedIn = false, _isLoading = false;
   FirebaseUser _authUser;
+  BuildContext _scaffoldContext;
+  
   @override
   void initState() {
     super.initState();
-    
+    PushNotificationService.init(_onFirebaseMessage);
+    print('INIT STATE==========================================');
   }
+  
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -94,12 +118,17 @@ class _State extends State<MainPage>{
         title: new Text(widget.title),
         actions: [
           new ABPopUpMenu(
-            widget.menuList.where( (menu) => menu.flag==_isLoggedIn ).toList(),
+            widget.menuList.where( (menu) => menu.flag==_isLoggedIn || menu.alwaysOn ).toList(),
             onSelect: _onSelect
           )
         ]
       ),
-      body: _isLoading ? loader() : _bodyContent
+      body: new Builder(
+        builder: (BuildContext context){
+          _scaffoldContext = context;
+          return _isLoading ? loader() : _bodyContent;
+        }
+      )
     );
   }
   
@@ -122,6 +151,18 @@ class _State extends State<MainPage>{
         setState((){ _isLoading=false; });
         Location initialPos = new Location(12.8797, 121.7740);
         LocationMap.show(initialPos);
+      break;
+      case 5:// My Profile
+        setState((){ 
+          _isLoading=false; 
+          _bodyContent = new MoviesList();
+        });
+      break;
+      case 6:// My Profile
+        setState((){ 
+          _isLoading=false; 
+          _bodyContent = new UsersList();
+        });
       break;
     }
   }
@@ -154,6 +195,10 @@ class _State extends State<MainPage>{
       context,
       new MaterialPageRoute(builder: (context) => new Profile(_authUser)),
     );
+  }
+
+  _onFirebaseMessage(message){
+    generateSnackbar(_scaffoldContext,new Text(message['msg']),10);
   }
 
   _errCatcher(err) => print('error: $err');

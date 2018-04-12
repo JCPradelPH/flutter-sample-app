@@ -1,36 +1,37 @@
 import 'package:flutter/material.dart';
 
-Widget mpWrapper(
-  Widget c,{
-    margin = const EdgeInsets.all(0.0),
-    padding = const EdgeInsets.all(0.0),
-    backColor = Colors.transparent,
-    width
-  }) => new Container(
-    margin: margin,
-    padding: padding,
-    width: width,
-    color: backColor,
-    child: c
-  );
-
 Widget loader() => new Center(
   child: new Center(
     child: new Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        mpWrapper(new CircularProgressIndicator(),margin:const EdgeInsets.only(right:20.0)),
+        new Container( child: new CircularProgressIndicator(),margin:const EdgeInsets.only(right:20.0)),
         new Text("Loading"),
       ],
     ),
   ),
 );
 
-generateSnackbar(context,content){
+Widget materialButton(Color color, String label, {VoidCallback onPressed}) => new Material(
+  borderRadius: BorderRadius.circular(5.0),
+  shadowColor: Colors.black54,
+  elevation: 10.0,
+  child: new MaterialButton(
+    minWidth: 150.0,
+    height: 50.0,
+    color: color,
+    child: new Text(label),
+    onPressed: onPressed,
+  )
+);
+
+generateSnackbar(context,content, int durationInSecs){
+  print("generateSnackbar===================");
   Scaffold.of(context)
     .showSnackBar(
       new SnackBar(
-        content: content
+        content: content,
+        duration: new Duration(seconds: durationInSecs)
       )
     );
 }

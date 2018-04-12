@@ -2,30 +2,19 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter/services.dart';
 
-import '../../components/shared_components.dart';
-import '../../utils/ab_menu_adapter.dart';
-import '../../components/listview.dart';
+import '../../../components/card_listitem.dart';
+import '../../../components/shared_components.dart';
+import '../../../utils/global_adapter.dart';
 
-class HomeScreen extends StatelessWidget{
-
-  @override
-  Widget build(BuildContext context) {
-    return new Scaffold(
-      body: new HomePage()
-    );
-  }
-}
-
-class HomePage extends StatefulWidget{
-  
+class MoviesList extends StatefulWidget{
   @override
   _State createState() => new _State();
 }
 
-class _State extends State<HomePage>{
-  
+class _State extends State<MoviesList>{
+
   List<MenuAdapter> _movieList = new List<MenuAdapter>();
 
   @override
@@ -38,8 +27,31 @@ class _State extends State<HomePage>{
   Widget build(BuildContext context) {
     return new Container(
       child: _movieList.length>0?
-      new Listview(_movieList):
+      _listviewBuild(_movieList):
       loader(),
+    );
+  }
+
+  _listviewBuild(_movieList) => new ListView.builder(
+    shrinkWrap: true,
+    itemCount: _movieList.length,
+    padding: new EdgeInsets.symmetric(vertical: 8.0),
+    scrollDirection: Axis.vertical,
+    itemBuilder: (BuildContext context, int index){
+      return _mapDataToItem(context, index, _movieList);
+    }
+  );
+
+  _mapDataToItem(BuildContext context, int index, _itemList) {
+    return new CardListItem(
+      _itemList[index].listImage,
+      _itemList[index].listTitle,
+      subs: [
+        _itemList[index].subTitle1,
+        _itemList[index].subTitle2,
+        _itemList[index].subTitle3,
+      ],
+      onTap: () => generateSnackbar(context, new Text(_itemList[index].listTitle), 2),
     );
   }
 
@@ -70,9 +82,9 @@ class _State extends State<HomePage>{
             subTitle1: mov['year'].toString(),
             subTitle2: 'Rated '+mov['mpaa_rating'],
             subTitle3: 'Score: '+mov['ratings']['audience_score'].toString(),
-            tapEvent: () => generateSnackbar(context, new Text(mov['title']))
           )
         );
     } ); 
   }
+
 }

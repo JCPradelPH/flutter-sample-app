@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import './shared_components.dart';
 
 class ButtonIcon extends StatelessWidget{
 
@@ -29,11 +28,11 @@ class ButtonIcon extends StatelessWidget{
   Widget build(BuildContext context){
     return new Material(
       color: Colors.transparent,
-      child: mpWrapper(
-          _mainLabel(),
+      child: new Container(
+          child: _mainLabel(),
           margin: new EdgeInsets.all(5.0),
           width: width,
-          backColor: backColor
+          color: backColor
         )
     );
   }
@@ -55,8 +54,8 @@ class ButtonIcon extends StatelessWidget{
       )
     )
   );
-  _positionedButtonText() => mpWrapper(
-    _buttonText(),
+  _positionedButtonText() => new Container(
+    child: _buttonText(),
     margin: new EdgeInsets.only(
       top:_textTopMargin(),
       left:_textLeftMargin()

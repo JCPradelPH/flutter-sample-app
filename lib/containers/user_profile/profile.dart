@@ -1,8 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../../components/shared_components.dart';
-
 class Profile extends StatelessWidget {
 
   final FirebaseUser authUser;
@@ -21,8 +19,8 @@ class Profile extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            mpWrapper(
-              new CircleAvatar(
+            new Container(
+              child: new CircleAvatar(
                 backgroundImage: new NetworkImage(authUser.photoUrl),
                 radius:50.0
               ),

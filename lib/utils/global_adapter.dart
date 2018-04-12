@@ -13,11 +13,13 @@ class MenuAdapter {
     this.subTitle2, 
     this.subTitle3, 
     this.tapEvent, 
+    this.alwaysOn, 
     this.listTitle });
   final String title;
   final IconData icon;
   final Color iconColor;
   final bool flag;
+  final bool alwaysOn;
   final dynamic actionId;
   final Image listImage;
   final String listTitle;

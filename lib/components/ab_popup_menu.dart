@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../utils/ab_menu_adapter.dart';
-import './button_icon.dart';
+import '../utils/global_adapter.dart';
+
 
 class ABPopUpMenu extends StatelessWidget{
 
@@ -28,19 +28,8 @@ class ABPopUpMenu extends StatelessWidget{
       }).toList();
   }
 
-  final num _fontSize = 15.0, _iconSize = 35.0, 
-    _positionIconLeft = 0;
-  final Color _textColor = const Color.fromRGBO(88,88,88, 1.0);
-
-  _menuItems(choice) => new ButtonIcon(
-    choice.title, 
-    choice.icon, _positionIconLeft,
-    iconSize: _iconSize,
-    iconColor: choice.iconColor,
-    textStyle: new TextStyle(
-      fontSize: _fontSize,
-      color: _textColor,
-      fontWeight: FontWeight.w300
-    )
+  _menuItems(choice) => new ListTile(
+    leading: new Icon(choice.icon),
+    title: new Text(choice.title)
   );
 }

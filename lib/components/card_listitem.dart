@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import './shared_components.dart';
 
 class CardListItem extends StatelessWidget{
 
   final Color backColor;
   final VoidCallback onTap;
-  final Image _itemImage;
+  final dynamic _itemImage;
   final String _title;
-  final String subtitle1, subtitle2, subtitle3;
-
+  final List<String> subs;
+  final TextStyle _smallText = new TextStyle(fontSize: 10.0,fontWeight: FontWeight.w400);
+  final TextStyle _boldText = new TextStyle(fontSize: 15.0,fontWeight: FontWeight.bold);
   CardListItem(
     this._itemImage,
     this._title,
@@ -16,31 +16,27 @@ class CardListItem extends StatelessWidget{
       Key key,
       this.backColor,
       this.onTap,
-      this.subtitle1,
-      this.subtitle2,
-      this.subtitle3,
+      this.subs
     }
   ) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    
     return _materialWrapper(
       new Card(
-        child: new ListTile(
-          onTap: onTap,
-          title: mpWrapper(
-            _tileRow(),
-            padding:const EdgeInsets.only(top:10.0,bottom:10.0)
+        child: new Container(
+          padding: new EdgeInsets.only(top: 10.0, bottom: 10.0),
+          child: new ListTile(
+            onTap: onTap,
+            leading: _itemImage,
+            title: _itemInfoColumn()
           )
         ) 
       )
     );
   }
 
-  _tileRow() => new Row(
-    mainAxisSize: MainAxisSize.max,
-    mainAxisAlignment: MainAxisAlignment.start,
-    children: _listItemRow()
-  );
+  
 
   _itemInfoColumn() => new Column(
     mainAxisSize: MainAxisSize.max,
@@ -48,27 +44,12 @@ class CardListItem extends StatelessWidget{
     crossAxisAlignment: CrossAxisAlignment.start,
     children: _titleInfoSection()
   );
-
-  _titleInfoSection() => [
-    mpWrapper(
-      new Text(
-          _title, 
-          style: new TextStyle(fontSize: 15.0,fontWeight: FontWeight.bold)
-        ),
-      margin:const EdgeInsets.only(bottom:5.0)
-    ),
-    new Text(subtitle1),
-    new Text(subtitle2),
-    new Text(subtitle3),
-  ];
   
-  _listItemRow() => [
-    _itemImage,
-    mpWrapper(
-      _itemInfoColumn(),
-      margin: const EdgeInsets.only(left:10.0)
-    )
-  ];
+  List<Widget> _titleInfoSection(){ 
+    List<Widget> children = subs.map<Widget>( (sub) => new Text(sub, style: _smallText) ).toList(growable: true);
+    children.insert( 0,new Text(_title,style: _boldText) );
+    return children;
+  }
 
   _materialWrapper(c) => new Material(
     color: Colors.transparent,
