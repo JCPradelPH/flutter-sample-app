@@ -1,6 +1,6 @@
 # Redux+Epics+Firebase in Flutter
 
-A new Flutter project.
+A Flutter project integrated with Redux, Redux Epics, Firebase Auth and Firestore.
 
 ## Getting Started
 
