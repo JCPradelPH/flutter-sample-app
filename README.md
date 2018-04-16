@@ -1,4 +1,4 @@
-# menu_list
+# Redux+Epics+Firebase in Flutter
 
 A new Flutter project.
 
