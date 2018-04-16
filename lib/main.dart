@@ -119,8 +119,6 @@ class _State extends State<MainPage>{
   // Widget _bodyContent = new MoviesList();
   // Widget _bodyContent = new UsersList();
   
-  bool _isLoggedIn = false;
-  FirebaseUser _authUser;
   BuildContext _scaffoldContext;
   
   @override
