@@ -46,7 +46,9 @@ class CardListItem extends StatelessWidget{
   );
   
   List<Widget> _titleInfoSection(){ 
-    List<Widget> children = subs.map<Widget>( (sub) => new Text(sub, style: _smallText) ).toList(growable: true);
+    List<Widget> children = subs!=null?subs
+      .map<Widget>( (sub) => new Text(sub, style: _smallText) )
+      .toList(growable: true) : new List<Widget>();
     children.insert( 0,new Text(_title,style: _boldText) );
     return children;
   }

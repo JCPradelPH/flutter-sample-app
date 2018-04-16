@@ -6,14 +6,15 @@ import '../utils/global_adapter.dart';
 class ABPopUpMenu extends StatelessWidget{
 
   final dynamic onSelect;
+  final dynamic store;
   final List<MenuAdapter> _choices;
 
-  ABPopUpMenu(this._choices,{this.onSelect});
+  ABPopUpMenu(this._choices,{this.onSelect,this.store});
 
   @override
   Widget build(BuildContext context) {
     return new PopupMenuButton<MenuAdapter>(
-      onSelected: onSelect,
+      onSelected: (menuAdapter) => onSelect(menuAdapter,store),
       itemBuilder: _menuChoices,
     );
   }

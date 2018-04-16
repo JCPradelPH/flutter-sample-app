@@ -1,0 +1,2 @@
+class AppLoading{}
+class AppLoaded{}

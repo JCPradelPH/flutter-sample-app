@@ -8,7 +8,6 @@ import '../../utils/composite_subs.dart';
 class LocationMap{
 
   static final _mapView = new MapView();
-  static final _compositeSubscription = new CompositeSubscription();
   
   static show(initialPos){
     MapView.setApiKey("AIzaSyBqzm80H-5TfS2jtGyM5F6dTMnyE0UCsKU");
@@ -24,7 +23,7 @@ class LocationMap{
         new ToolbarAction("Get Location", 2)
       ]
     );
-    _compositeSubscription.add(
+    CompositeSubscription.add(
       _mapView.onToolbarAction.listen((id) {
         if (id == 1) _closeMap();
         if (id == 2){
@@ -42,7 +41,7 @@ class LocationMap{
 
   static _closeMap(){
     _mapView.dismiss();
-    _compositeSubscription.cancel();
+    CompositeSubscription.cancel();
   }
 
   static _getCurrentLocation() async => await new Location().getLocation;

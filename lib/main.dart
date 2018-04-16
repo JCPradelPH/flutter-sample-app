@@ -2,16 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:map_view/map_view.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:redux/redux.dart';
+import 'package:redux_epics/redux_epics.dart';
 
+import 'actions/loader_actions.dart';
+import 'actions/user_actions.dart';
+import 'actions/view_actions.dart';
+import 'app_state.dart';
 import 'components/ab_popup_menu.dart';
 import 'components/shared_components.dart';
+import 'containers/home/home_container.dart';
+import 'containers/home/movies/movies_stream.dart';
+import 'containers/home/users/users_list.dart';
 import 'containers/map/map.dart';
-import 'containers/screens/movies/movies_list.dart';
-import 'containers/screens/users/users_list.dart';
-import 'containers/user_profile/profile.dart';
+import 'containers/profile/profile.dart';
 import 'utils/global_adapter.dart';
 import 'utils/push_notif_service.dart';
 import 'utils/social_media_auth.dart';
+import './reducers/appstate_reducer.dart';
+import './middlewares/user_middleware.dart';
 
 void main(){
   runApp(new MainContainer());
@@ -19,22 +29,30 @@ void main(){
 
   
 class MainContainer extends StatelessWidget{
+  static final allEpics = combineEpics<AppState>([fbLoginEpic,googleLoginEpic]);
+  final store = Store<AppState>( 
+    appStateReducer, 
+    initialState: new AppState(), 
+    middleware: [new EpicMiddleware(allEpics)] 
+  );
+
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-      title: 'MPA Development',
-      theme: new ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: new MainPage(title: 'MPA Devel'),
+    return new StoreProvider<AppState>(
+      store: store,
+      child: new MaterialApp(
+        title: 'MPA Development',
+        theme: new ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: new MainPage(title: 'MPA Devel'),
+      )
     );
   }
 }
 
 class MainPage extends StatefulWidget{
-
   final String title;
-
   final menuList = const <MenuAdapter>[
     const MenuAdapter(
       title: 'Login with Facebook', 
@@ -97,10 +115,11 @@ class MainPage extends StatefulWidget{
 
 class _State extends State<MainPage>{
 
-  Widget _bodyContent = new MoviesList();
+  Widget _bodyContent;
+  // Widget _bodyContent = new MoviesList();
   // Widget _bodyContent = new UsersList();
   
-  bool _isLoggedIn = false, _isLoading = false;
+  bool _isLoggedIn = false;
   FirebaseUser _authUser;
   BuildContext _scaffoldContext;
   
@@ -108,6 +127,7 @@ class _State extends State<MainPage>{
   void initState() {
     super.initState();
     PushNotificationService.init(_onFirebaseMessage);
+    _bodyContent = new HomePage();
     print('INIT STATE==========================================');
   }
   
@@ -117,29 +137,37 @@ class _State extends State<MainPage>{
       appBar: new AppBar(
         title: new Text(widget.title),
         actions: [
-          new ABPopUpMenu(
-            widget.menuList.where( (menu) => menu.flag==_isLoggedIn || menu.alwaysOn ).toList(),
-            onSelect: _onSelect
-          )
+          new StoreConnector<AppState,dynamic>(
+            converter: (store) => store,
+            builder: (context, store){
+              return new ABPopUpMenu(
+                widget.menuList.where( (menu) => menu.flag==store.state.loggedIn || menu.alwaysOn ).toList(),
+                onSelect: _onSelect,
+                store: store
+              );
+            }
+          ),
         ]
       ),
       body: new Builder(
         builder: (BuildContext context){
           _scaffoldContext = context;
-          return _isLoading ? loader() : _bodyContent;
+          return new StoreConnector<AppState,bool>(
+            converter: (store) => store.state.loginLoading,
+            builder: (context,loading) => loading ? loader() : _bodyContent
+          );
         }
       )
     );
   }
   
-  _onSelect(MenuAdapter menuItem) {
-    setState((){ _isLoading=true; });
+  _onSelect(MenuAdapter menuItem, store) {
     switch(menuItem.actionId){
       case 0:// Login via Facebook
-        _handleFacebookLogin();
+        store.dispatch(new FacebookLogin(loading:true));
       break;
       case 1:// SignIn Via Google
-        _handleGoogleSignIn();
+        store.dispatch(new GoogleLogin(loading:true));
       break;
       case 2:// Login via Email
         // show login via email page
@@ -147,59 +175,27 @@ class _State extends State<MainPage>{
       case 3:// My Profile
         _navigateToProfile();
       break;
-      case 4:// My Profile
-        setState((){ _isLoading=false; });
+      case 4:// Map
         Location initialPos = new Location(12.8797, 121.7740);
         LocationMap.show(initialPos);
       break;
-      case 5:// My Profile
-        setState((){ 
-          _isLoading=false; 
-          _bodyContent = new MoviesList();
-        });
+      case 5:// REST API Listview
+        store.dispatch( new SetView( new MovieStream() ) );
       break;
-      case 6:// My Profile
-        setState((){ 
-          _isLoading=false; 
-          _bodyContent = new UsersList();
-        });
+      case 6:// Firestore Listview
+        store.dispatch( new SetView( new UsersList() ) );
       break;
     }
   }
 
-  _handleGoogleSignIn() async {
-    SocialMediaAuth.execGoogleSignIn()
-      .then( _onLoginSuccess )
-      .catchError( _errCatcher );
-  }
-
-  _handleFacebookLogin(){
-    SocialMediaAuth.execFacebookLogin()
-      .then( _onLoginSuccess  )
-      .catchError( _errCatcher );
-  }
-
-  _onLoginSuccess(data){
-    _setLoggedInState(data);
-    _navigateToProfile();
-  }
-
-  _setLoggedInState(data) => setState((){ 
-    _authUser = data;
-    _isLoading=false; 
-    _isLoggedIn=true; 
-  });
-
   _navigateToProfile(){
     Navigator.push(
       context,
-      new MaterialPageRoute(builder: (context) => new Profile(_authUser)),
+      new MaterialPageRoute(builder: (context) => new Profile()),
     );
   }
 
   _onFirebaseMessage(message){
     generateSnackbar(_scaffoldContext,new Text(message['msg']),10);
   }
-
-  _errCatcher(err) => print('error: $err');
 }

@@ -1,312 +1,304 @@
-{
-	"total": 26,
-	"movies": [
-		{
-			"id": "12897",
-			"title": "The Matrix",
-			"year": 1999,
-			"mpaa_rating": "R",
-			"runtime": 136,
-			"critics_consensus": "An ingenious combination of Hong Kong action, ground-breaking Hollywood FX, and an imaginative vision.",
-			"release_dates": {
-				"theater": "1999-03-31",
-				"dvd": "1999-09-21"
+[
+	{
+		"id": "12897",
+		"title": "The Matrix",
+		"year": 1999,
+		"mpaa_rating": "R",
+		"runtime": 136,
+		"critics_consensus": "An ingenious combination of Hong Kong action, ground-breaking Hollywood FX, and an imaginative vision.",
+		"release_dates": {
+			"theater": "1999-03-31",
+			"dvd": "1999-09-21"
+		},
+		"ratings": {
+			"critics_rating": "Certified Fresh",
+			"critics_score": 87,
+			"audience_rating": "Upright",
+			"audience_score": 81
+		},
+		"synopsis": "",
+		"posters": {
+			"thumbnail": "http://content7.flixster.com/movie/16/90/52/1690525_mob.jpg",
+			"profile": "http://content7.flixster.com/movie/16/90/52/1690525_pro.jpg",
+			"detailed": "http://content7.flixster.com/movie/16/90/52/1690525_det.jpg",
+			"original": "http://content7.flixster.com/movie/16/90/52/1690525_ori.jpg"
+		},
+		"abridged_cast": [
+			{
+				"name": "Keanu Reeves",
+				"id": "162654049",
+				"characters": [
+					"Neo"
+				]
 			},
-			"ratings": {
-				"critics_rating": "Certified Fresh",
-				"critics_score": 87,
-				"audience_rating": "Upright",
-				"audience_score": 81
+			{
+				"name": "Laurence Fishburne",
+				"id": "162669090",
+				"characters": [
+					"Morpheus"
+				]
 			},
-			"synopsis": "",
-			"posters": {
-				"thumbnail": "http://content7.flixster.com/movie/16/90/52/1690525_mob.jpg",
-				"profile": "http://content7.flixster.com/movie/16/90/52/1690525_pro.jpg",
-				"detailed": "http://content7.flixster.com/movie/16/90/52/1690525_det.jpg",
-				"original": "http://content7.flixster.com/movie/16/90/52/1690525_ori.jpg"
+			{
+				"name": "Carrie-Anne Moss",
+				"id": "162669130",
+				"characters": [
+					"Trinity"
+				]
 			},
-			"abridged_cast": [
-				{
-					"name": "Keanu Reeves",
-					"id": "162654049",
-					"characters": [
-						"Neo"
-					]
-				},
-				{
-					"name": "Laurence Fishburne",
-					"id": "162669090",
-					"characters": [
-						"Morpheus"
-					]
-				},
-				{
-					"name": "Carrie-Anne Moss",
-					"id": "162669130",
-					"characters": [
-						"Trinity"
-					]
-				},
-				{
-					"name": "Hugo Weaving",
-					"id": "162709905",
-					"characters": [
-						"Agent Smith"
-					]
-				},
-				{
-					"name": "Gloria Foster",
-					"id": "364627698",
-					"characters": [
-						"The Oracle"
-					]
-				}
-			],
-			"alternate_ids": {
-				"imdb": "0133093"
+			{
+				"name": "Hugo Weaving",
+				"id": "162709905",
+				"characters": [
+					"Agent Smith"
+				]
 			},
-			"links": {
-				"self": "http://api.rottentomatoes.com/api/public/v1.0/movies/12897.json",
-				"alternate": "http://www.rottentomatoes.com/m/matrix/",
-				"cast": "http://api.rottentomatoes.com/api/public/v1.0/movies/12897/cast.json",
-				"clips": "http://api.rottentomatoes.com/api/public/v1.0/movies/12897/clips.json",
-				"reviews": "http://api.rottentomatoes.com/api/public/v1.0/movies/12897/reviews.json",
-				"similar": "http://api.rottentomatoes.com/api/public/v1.0/movies/12897/similar.json"
+			{
+				"name": "Gloria Foster",
+				"id": "364627698",
+				"characters": [
+					"The Oracle"
+				]
 			}
+		],
+		"alternate_ids": {
+			"imdb": "0133093"
 		},
-		{
-			"id": "13008",
-			"title": "The Matrix Reloaded",
-			"year": 2003,
-			"mpaa_rating": "R",
-			"runtime": 138,
-			"critics_consensus": "A worthy sequel even if it is a little heady and less satifying than the first Matrix.",
-			"release_dates": {
-				"theater": "2003-05-07",
-				"dvd": "2003-10-14"
-			},
-			"ratings": {
-				"critics_rating": "Certified Fresh",
-				"critics_score": 73,
-				"audience_rating": "Upright",
-				"audience_score": 74
-			},
-			"synopsis": "",
-			"posters": {
-				"thumbnail": "http://content8.flixster.com/movie/59/86/57/5986578_mob.jpg",
-				"profile": "http://content8.flixster.com/movie/59/86/57/5986578_pro.jpg",
-				"detailed": "http://content8.flixster.com/movie/59/86/57/5986578_det.jpg",
-				"original": "http://content8.flixster.com/movie/59/86/57/5986578_ori.jpg"
-			},
-			"abridged_cast": [
-				{
-					"name": "Keanu Reeves",
-					"id": "162654049",
-					"characters": [
-						"Neo"
-					]
-				},
-				{
-					"name": "Carrie-Anne Moss",
-					"id": "162669130",
-					"characters": [
-						"Trinity"
-					]
-				},
-				{
-					"name": "Laurence Fishburne",
-					"id": "162669090",
-					"characters": [
-						"Morpheus"
-					]
-				},
-				{
-					"name": "Hugo Weaving",
-					"id": "162709905",
-					"characters": [
-						"Agent Smith"
-					]
-				},
-				{
-					"name": "Jada Pinkett Smith",
-					"id": "162673877",
-					"characters": [
-						"Niobe"
-					]
-				}
-			],
-			"alternate_ids": {
-				"imdb": "0234215"
-			},
-			"links": {
-				"self": "http://api.rottentomatoes.com/api/public/v1.0/movies/13008.json",
-				"alternate": "http://www.rottentomatoes.com/m/matrix_reloaded/",
-				"cast": "http://api.rottentomatoes.com/api/public/v1.0/movies/13008/cast.json",
-				"clips": "http://api.rottentomatoes.com/api/public/v1.0/movies/13008/clips.json",
-				"reviews": "http://api.rottentomatoes.com/api/public/v1.0/movies/13008/reviews.json",
-				"similar": "http://api.rottentomatoes.com/api/public/v1.0/movies/13008/similar.json"
-			}
-		},
-		{
-			"id": "770687943",
-			"title": "Harry Potter and the Deathly Hallows",
-			"year": 2011,
-			"mpaa_rating": "PG-13",
-			"runtime": 130,
-			"critics_consensus": "Thrilling, powerfully acted, and visually dazzling...",
-			"release_dates": {
-				"theater": "2011-07-15"
-			},
-			"ratings": {
-				"critics_rating": "Certified Fresh",
-				"critics_score": 97,
-				"audience_rating": "Upright",
-				"audience_score": 93
-			},
-			"synopsis": "Harry Potter and the Deathly Hallows, is the final adventure...",
-			"posters": {
-				"thumbnail": "http://content8.flixster.com/movie/11/15/86/11158674_mob.jpg",
-				"profile": "http://content8.flixster.com/movie/11/15/86/11158674_pro.jpg",
-				"detailed": "http://content8.flixster.com/movie/11/15/86/11158674_det.jpg",
-				"original": "http://content8.flixster.com/movie/11/15/86/11158674_ori.jpg"
-			},
-			"abridged_cast": [
-				{
-					"name": "Daniel Radcliffe",
-					"characters": [
-						"Harry Potter"
-					]
-				},
-				{
-					"name": "Rupert Grint",
-					"characters": [
-						"Ron Weasley",
-						"Ron Wesley"
-					]
-				}
-			]
-		},
-		{
-			"id": "770687943",
-			"title": "Guardians of the Galaxy Vol 2",
-			"year": 2017,
-			"mpaa_rating": "PG-13",
-			"runtime": 130,
-			"critics_consensus": "Thrilling, powerfully acted, and visually dazzling...",
-			"release_dates": {
-				"theater": "2011-07-15"
-			},
-			"ratings": {
-				"critics_rating": "Certified Fresh",
-				"critics_score": 97,
-				"audience_rating": "Upright",
-				"audience_score": 93
-			},
-			"synopsis": "Harry Potter and the Deathly Hallows, is the final adventure...",
-			"posters": {
-				"thumbnail": "https://resizing.flixster.com/_7afKAkC8UifdosWktM9aMuK6Jw=/fit-in/80x80/v1.bTsxMTE3ODA4MjtqOzE3NzI0OzEyMDA7MTY4ODsyNTAw",
-				"profile": "http://content8.flixster.com/movie/11/15/86/11158674_pro.jpg",
-				"detailed": "http://content8.flixster.com/movie/11/15/86/11158674_det.jpg",
-				"original": "http://content8.flixster.com/movie/11/15/86/11158674_ori.jpg"
-			},
-			"abridged_cast": [
-				{
-					"name": "Daniel Radcliffe",
-					"characters": [
-						"Harry Potter"
-					]
-				},
-				{
-					"name": "Rupert Grint",
-					"characters": [
-						"Ron Weasley",
-						"Ron Wesley"
-					]
-				}
-			]
-		},
-		{
-			"id": "770687943",
-			"title": "Avengers: Infinity Wars",
-			"year": 2018,
-			"mpaa_rating": "PG-13",
-			"runtime": 130,
-			"critics_consensus": "Thrilling, powerfully acted, and visually dazzling...",
-			"release_dates": {
-				"theater": "2011-07-15"
-			},
-			"ratings": {
-				"critics_rating": "Certified Fresh",
-				"critics_score": 99,
-				"audience_rating": "Upright",
-				"audience_score": 93
-			},
-			"synopsis": "Harry Potter and the Deathly Hallows, is the final adventure...",
-			"posters": {
-				"thumbnail": "https://resizing.flixster.com/CIOAK-UdNhhKawcriJAnE6BpfgM=/fit-in/80x80/v1.bTsxMjcwMDQ5MztqOzE3Njk2OzEyMDA7MTY4ODsyNTAw",
-				"profile": "http://content8.flixster.com/movie/11/15/86/11158674_pro.jpg",
-				"detailed": "http://content8.flixster.com/movie/11/15/86/11158674_det.jpg",
-				"original": "http://content8.flixster.com/movie/11/15/86/11158674_ori.jpg"
-			},
-			"abridged_cast": [
-				{
-					"name": "Daniel Radcliffe",
-					"characters": [
-						"Harry Potter"
-					]
-				},
-				{
-					"name": "Rupert Grint",
-					"characters": [
-						"Ron Weasley",
-						"Ron Wesley"
-					]
-				}
-			]
-		},
-		{
-			"id": "770687943",
-			"title": "Justice League",
-			"year": 2017,
-			"mpaa_rating": "PG-13",
-			"runtime": 130,
-			"critics_consensus": "Thrilling, powerfully acted, and visually dazzling...",
-			"release_dates": {
-				"theater": "2011-07-15"
-			},
-			"ratings": {
-				"critics_rating": "Certified Fresh",
-				"critics_score": 63,
-				"audience_rating": "Upright",
-				"audience_score": 63
-			},
-			"synopsis": "Harry Potter and the Deathly Hallows, is the final adventure...",
-			"posters": {
-				"thumbnail": "https://resizing.flixster.com/JO5-86AW_lv67RQpZHVRbKwu98o=/fit-in/80x80/v1.bTsxMjU3NjUzNjtqOzE3Njk1OzEyMDA7NDA1MDs2MDAw",
-				"profile": "http://content8.flixster.com/movie/11/15/86/11158674_pro.jpg",
-				"detailed": "http://content8.flixster.com/movie/11/15/86/11158674_det.jpg",
-				"original": "http://content8.flixster.com/movie/11/15/86/11158674_ori.jpg"
-			},
-			"abridged_cast": [
-				{
-					"name": "Daniel Radcliffe",
-					"characters": [
-						"Harry Potter"
-					]
-				},
-				{
-					"name": "Rupert Grint",
-					"characters": [
-						"Ron Weasley",
-						"Ron Wesley"
-					]
-				}
-			]
+		"links": {
+			"self": "http://api.rottentomatoes.com/api/public/v1.0/movies/12897.json",
+			"alternate": "http://www.rottentomatoes.com/m/matrix/",
+			"cast": "http://api.rottentomatoes.com/api/public/v1.0/movies/12897/cast.json",
+			"clips": "http://api.rottentomatoes.com/api/public/v1.0/movies/12897/clips.json",
+			"reviews": "http://api.rottentomatoes.com/api/public/v1.0/movies/12897/reviews.json",
+			"similar": "http://api.rottentomatoes.com/api/public/v1.0/movies/12897/similar.json"
 		}
-	],
-	"links": {
-		"self": "http://api.rottentomatoes.com/api/public/v1.0/movies.json?q=matrix&page_limit=2&page=1",
-		"next": "http://api.rottentomatoes.com/api/public/v1.0/movies.json?q=matrix&page_limit=2&page=2"
 	},
-	"link_template": "http://api.rottentomatoes.com/api/public/v1.0/movies.json?q={search-term}&page_limit={results-per-page}&page={page-number}"
-}
+	{
+		"id": "13008",
+		"title": "The Matrix Reloaded",
+		"year": 2003,
+		"mpaa_rating": "R",
+		"runtime": 138,
+		"critics_consensus": "A worthy sequel even if it is a little heady and less satifying than the first Matrix.",
+		"release_dates": {
+			"theater": "2003-05-07",
+			"dvd": "2003-10-14"
+		},
+		"ratings": {
+			"critics_rating": "Certified Fresh",
+			"critics_score": 73,
+			"audience_rating": "Upright",
+			"audience_score": 74
+		},
+		"synopsis": "",
+		"posters": {
+			"thumbnail": "http://content8.flixster.com/movie/59/86/57/5986578_mob.jpg",
+			"profile": "http://content8.flixster.com/movie/59/86/57/5986578_pro.jpg",
+			"detailed": "http://content8.flixster.com/movie/59/86/57/5986578_det.jpg",
+			"original": "http://content8.flixster.com/movie/59/86/57/5986578_ori.jpg"
+		},
+		"abridged_cast": [
+			{
+				"name": "Keanu Reeves",
+				"id": "162654049",
+				"characters": [
+					"Neo"
+				]
+			},
+			{
+				"name": "Carrie-Anne Moss",
+				"id": "162669130",
+				"characters": [
+					"Trinity"
+				]
+			},
+			{
+				"name": "Laurence Fishburne",
+				"id": "162669090",
+				"characters": [
+					"Morpheus"
+				]
+			},
+			{
+				"name": "Hugo Weaving",
+				"id": "162709905",
+				"characters": [
+					"Agent Smith"
+				]
+			},
+			{
+				"name": "Jada Pinkett Smith",
+				"id": "162673877",
+				"characters": [
+					"Niobe"
+				]
+			}
+		],
+		"alternate_ids": {
+			"imdb": "0234215"
+		},
+		"links": {
+			"self": "http://api.rottentomatoes.com/api/public/v1.0/movies/13008.json",
+			"alternate": "http://www.rottentomatoes.com/m/matrix_reloaded/",
+			"cast": "http://api.rottentomatoes.com/api/public/v1.0/movies/13008/cast.json",
+			"clips": "http://api.rottentomatoes.com/api/public/v1.0/movies/13008/clips.json",
+			"reviews": "http://api.rottentomatoes.com/api/public/v1.0/movies/13008/reviews.json",
+			"similar": "http://api.rottentomatoes.com/api/public/v1.0/movies/13008/similar.json"
+		}
+	},
+	{
+		"id": "770687943",
+		"title": "Harry Potter and the Deathly Hallows",
+		"year": 2011,
+		"mpaa_rating": "PG-13",
+		"runtime": 130,
+		"critics_consensus": "Thrilling, powerfully acted, and visually dazzling...",
+		"release_dates": {
+			"theater": "2011-07-15"
+		},
+		"ratings": {
+			"critics_rating": "Certified Fresh",
+			"critics_score": 97,
+			"audience_rating": "Upright",
+			"audience_score": 93
+		},
+		"synopsis": "Harry Potter and the Deathly Hallows, is the final adventure...",
+		"posters": {
+			"thumbnail": "http://content8.flixster.com/movie/11/15/86/11158674_mob.jpg",
+			"profile": "http://content8.flixster.com/movie/11/15/86/11158674_pro.jpg",
+			"detailed": "http://content8.flixster.com/movie/11/15/86/11158674_det.jpg",
+			"original": "http://content8.flixster.com/movie/11/15/86/11158674_ori.jpg"
+		},
+		"abridged_cast": [
+			{
+				"name": "Daniel Radcliffe",
+				"characters": [
+					"Harry Potter"
+				]
+			},
+			{
+				"name": "Rupert Grint",
+				"characters": [
+					"Ron Weasley",
+					"Ron Wesley"
+				]
+			}
+		]
+	},
+	{
+		"id": "770687943",
+		"title": "Guardians of the Galaxy Vol 2",
+		"year": 2017,
+		"mpaa_rating": "PG-13",
+		"runtime": 130,
+		"critics_consensus": "Thrilling, powerfully acted, and visually dazzling...",
+		"release_dates": {
+			"theater": "2011-07-15"
+		},
+		"ratings": {
+			"critics_rating": "Certified Fresh",
+			"critics_score": 97,
+			"audience_rating": "Upright",
+			"audience_score": 93
+		},
+		"synopsis": "Harry Potter and the Deathly Hallows, is the final adventure...",
+		"posters": {
+			"thumbnail": "https://resizing.flixster.com/_7afKAkC8UifdosWktM9aMuK6Jw=/fit-in/80x80/v1.bTsxMTE3ODA4MjtqOzE3NzI0OzEyMDA7MTY4ODsyNTAw",
+			"profile": "http://content8.flixster.com/movie/11/15/86/11158674_pro.jpg",
+			"detailed": "http://content8.flixster.com/movie/11/15/86/11158674_det.jpg",
+			"original": "http://content8.flixster.com/movie/11/15/86/11158674_ori.jpg"
+		},
+		"abridged_cast": [
+			{
+				"name": "Daniel Radcliffe",
+				"characters": [
+					"Harry Potter"
+				]
+			},
+			{
+				"name": "Rupert Grint",
+				"characters": [
+					"Ron Weasley",
+					"Ron Wesley"
+				]
+			}
+		]
+	},
+	{
+		"id": "770687943",
+		"title": "Avengers: Infinity Wars",
+		"year": 2018,
+		"mpaa_rating": "PG-13",
+		"runtime": 130,
+		"critics_consensus": "Thrilling, powerfully acted, and visually dazzling...",
+		"release_dates": {
+			"theater": "2011-07-15"
+		},
+		"ratings": {
+			"critics_rating": "Certified Fresh",
+			"critics_score": 99,
+			"audience_rating": "Upright",
+			"audience_score": 93
+		},
+		"synopsis": "Harry Potter and the Deathly Hallows, is the final adventure...",
+		"posters": {
+			"thumbnail": "https://resizing.flixster.com/CIOAK-UdNhhKawcriJAnE6BpfgM=/fit-in/80x80/v1.bTsxMjcwMDQ5MztqOzE3Njk2OzEyMDA7MTY4ODsyNTAw",
+			"profile": "http://content8.flixster.com/movie/11/15/86/11158674_pro.jpg",
+			"detailed": "http://content8.flixster.com/movie/11/15/86/11158674_det.jpg",
+			"original": "http://content8.flixster.com/movie/11/15/86/11158674_ori.jpg"
+		},
+		"abridged_cast": [
+			{
+				"name": "Daniel Radcliffe",
+				"characters": [
+					"Harry Potter"
+				]
+			},
+			{
+				"name": "Rupert Grint",
+				"characters": [
+					"Ron Weasley",
+					"Ron Wesley"
+				]
+			}
+		]
+	},
+	{
+		"id": "770687943",
+		"title": "Justice League",
+		"year": 2017,
+		"mpaa_rating": "PG-13",
+		"runtime": 130,
+		"critics_consensus": "Thrilling, powerfully acted, and visually dazzling...",
+		"release_dates": {
+			"theater": "2011-07-15"
+		},
+		"ratings": {
+			"critics_rating": "Certified Fresh",
+			"critics_score": 63,
+			"audience_rating": "Upright",
+			"audience_score": 63
+		},
+		"synopsis": "Harry Potter and the Deathly Hallows, is the final adventure...",
+		"posters": {
+			"thumbnail": "https://resizing.flixster.com/JO5-86AW_lv67RQpZHVRbKwu98o=/fit-in/80x80/v1.bTsxMjU3NjUzNjtqOzE3Njk1OzEyMDA7NDA1MDs2MDAw",
+			"profile": "http://content8.flixster.com/movie/11/15/86/11158674_pro.jpg",
+			"detailed": "http://content8.flixster.com/movie/11/15/86/11158674_det.jpg",
+			"original": "http://content8.flixster.com/movie/11/15/86/11158674_ori.jpg"
+		},
+		"abridged_cast": [
+			{
+				"name": "Daniel Radcliffe",
+				"characters": [
+					"Harry Potter"
+				]
+			},
+			{
+				"name": "Rupert Grint",
+				"characters": [
+					"Ron Weasley",
+					"Ron Wesley"
+				]
+			}
+		]
+	}
+]
