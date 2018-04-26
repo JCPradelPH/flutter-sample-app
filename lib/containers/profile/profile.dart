@@ -4,6 +4,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import '../../actions/user_actions.dart';
 import '../../app_state.dart';
 
+// dumb widget container for the profile screen
 class Profile extends StatelessWidget {
 
   @override

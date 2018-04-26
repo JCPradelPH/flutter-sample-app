@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+// generic class for performing firebase's social media login integration
 class SocialMediaAuth{
   static final FacebookLogin facebookSignIn = new FacebookLogin();
   static final _auth = FirebaseAuth.instance;

@@ -6,6 +6,7 @@ import '../actions/user_actions.dart';
 import '../app_state.dart';
 import '../utils/social_media_auth.dart';
 
+// redux epics for handling firebase login events
 Stream<dynamic> fbLoginEpic(Stream<dynamic> actions, EpicStore<AppState> store) {
   return new Observable(actions)
     .ofType(new TypeToken<FacebookLogin>())

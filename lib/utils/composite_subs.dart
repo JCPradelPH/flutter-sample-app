@@ -1,5 +1,6 @@
 import 'dart:async';
 
+// utility class for cleaning up subscribed UI events
 class CompositeSubscription {
   static Set<StreamSubscription> _subscriptions = new Set();
 

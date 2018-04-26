@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+
+// generic loader widget
 Widget loader() => new Center(
   child: new Center(
     child: new Row(
@@ -12,6 +14,7 @@ Widget loader() => new Center(
   ),
 );
 
+// generic material button widget
 Widget materialButton(Color color, String label, {VoidCallback onPressed}) => new Material(
   borderRadius: BorderRadius.circular(5.0),
   shadowColor: Colors.black54,
@@ -25,6 +28,7 @@ Widget materialButton(Color color, String label, {VoidCallback onPressed}) => ne
   )
 );
 
+// used to show snackbar
 generateSnackbar(context,content, int durationInSecs){
   print("generateSnackbar===================");
   Scaffold.of(context)

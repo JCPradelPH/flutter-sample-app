@@ -21,8 +21,8 @@ class _State extends State<UsersList>{
   Widget build(BuildContext context) {
     return new Container(
       child: new StreamBuilder(
-          stream: Firestore.instance.collection('rooms').snapshots,
-          builder: (context, snapshot){
+          stream: Firestore.instance.collection('rooms').snapshots, // get firebase snapshot from rooms path
+          builder: (context, snapshot){ // bind snapshot to listview widget
             return snapshot.hasData ? 
               _listviewBuild(snapshot) : 
               loader();
@@ -31,6 +31,7 @@ class _State extends State<UsersList>{
     );
   }
   
+  // function that accepts a firebase snapshot and builds a list from the snapshot
   _listviewBuild(snapshot) => new ListView.builder(
     shrinkWrap: true,
     itemCount: snapshot.data.documents.length,
@@ -41,6 +42,7 @@ class _State extends State<UsersList>{
     }
   );
 
+  // list item adapter to map snapshot data item to a stateless CardListItem widget
   _mapDataToItem(BuildContext context, int index, _itemList) {
     return new CardListItem(
       new CircleAvatar(

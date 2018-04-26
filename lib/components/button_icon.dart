@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// generic widget to create buttons with icons
 class ButtonIcon extends StatelessWidget{
 
   final String _buttonLabel;

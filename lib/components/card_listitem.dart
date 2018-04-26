@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// generic widget to create cards as list items... accepts formatted structure of list item
 class CardListItem extends StatelessWidget{
 
   final Color backColor;

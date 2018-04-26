@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../utils/global_adapter.dart';
 
-
+// generic widget to create action bar menus
 class ABPopUpMenu extends StatelessWidget{
 
   final dynamic onSelect;

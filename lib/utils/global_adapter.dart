@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 
+// global adapter for list items, spinners and menu items
 class MenuAdapter {
   const MenuAdapter({ 
     this.title, 

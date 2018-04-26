@@ -20,7 +20,7 @@ class _State extends State<HomePage>{
 
   @override
   Widget build(BuildContext context) {
-    return new StoreConnector<AppState,Widget>(
+    return new StoreConnector<AppState,Widget>( // dynamically show movies/users list depending on global state
       converter: (store) => store.state.view,
       builder: (context,view){
         return new Container(

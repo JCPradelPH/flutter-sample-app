@@ -2,6 +2,7 @@ import 'package:redux/redux.dart';
 
 import '../actions/user_actions.dart';
 
+//redux reducer for firebase login
 final userReducer = combineReducers<User>([
   new TypedReducer<User,User>(_facebookLogin),
   new TypedReducer<User,User>(_googleLogin),

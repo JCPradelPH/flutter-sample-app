@@ -1,6 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 
-
+// generic class that consumes firebase's push notification service
 class PushNotificationService{
   
   static final _firebaseMessaging = new FirebaseMessaging();

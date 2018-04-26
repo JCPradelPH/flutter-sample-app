@@ -5,17 +5,19 @@ import 'package:location/location.dart';
 
 import '../../utils/composite_subs.dart';
 
+// object that handles the map library events
 class LocationMap{
 
   static final _mapView = new MapView();
   
   static show(initialPos){
-    MapView.setApiKey("AIzaSyBqzm80H-5TfS2jtGyM5F6dTMnyE0UCsKU");
+    MapView.setApiKey("AIzaSyBqzm80H-5TfS2jtGyM5F6dTMnyE0UCsKU"); // library api key
     MapOptions options = new MapOptions(
       mapViewType: MapViewType.normal,
       showUserLocation: true,
       initialCameraPosition: new CameraPosition(initialPos, 6.0)
     );
+    // show map view 
     _mapView.show(
       options,
       toolbarActions: [
@@ -23,6 +25,7 @@ class LocationMap{
         new ToolbarAction("Get Location", 2)
       ]
     );
+    // subscribe to map events
     CompositeSubscription.add(
       _mapView.onToolbarAction.listen((id) {
         if (id == 1) _closeMap();

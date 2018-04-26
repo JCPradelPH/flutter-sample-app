@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'actions/user_actions.dart';
 
+// app global state
 class AppState {
   final bool loading, loginLoading, loggedIn;
   final User user;

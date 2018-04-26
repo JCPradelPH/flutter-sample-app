@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:map_view/map_view.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_epics/redux_epics.dart';
 
-import 'actions/loader_actions.dart';
 import 'actions/user_actions.dart';
 import 'actions/view_actions.dart';
 import 'app_state.dart';
@@ -19,14 +17,13 @@ import 'containers/map/map.dart';
 import 'containers/profile/profile.dart';
 import 'utils/global_adapter.dart';
 import 'utils/push_notif_service.dart';
-import 'utils/social_media_auth.dart';
 import './reducers/appstate_reducer.dart';
 import './middlewares/user_middleware.dart';
 
+// main app entry
 void main(){
   runApp(new MainContainer());
 }
-
   
 class MainContainer extends StatelessWidget{
   static final allEpics = combineEpics<AppState>([fbLoginEpic,googleLoginEpic]);
@@ -51,8 +48,11 @@ class MainContainer extends StatelessWidget{
   }
 }
 
+// MainPage stateful widget
 class MainPage extends StatefulWidget{
   final String title;
+
+  // action bar menus with icons and other props
   final menuList = const <MenuAdapter>[
     const MenuAdapter(
       title: 'Login with Facebook', 
@@ -113,20 +113,18 @@ class MainPage extends StatefulWidget{
   _State createState() => new _State();
 }
 
+// MainPage state
 class _State extends State<MainPage>{
 
-  Widget _bodyContent;
-  // Widget _bodyContent = new MoviesList();
-  // Widget _bodyContent = new UsersList();
+  Widget _bodyContent; // dynamically changes on setState. Container for the content of MainPage
   
-  BuildContext _scaffoldContext;
+  BuildContext _scaffoldContext; // context to be passed to child components
   
   @override
   void initState() {
     super.initState();
-    PushNotificationService.init(_onFirebaseMessage);
+    PushNotificationService.init(_onFirebaseMessage); // initialize firebase push notif
     _bodyContent = new HomePage();
-    print('INIT STATE==========================================');
   }
   
   @override
@@ -135,10 +133,10 @@ class _State extends State<MainPage>{
       appBar: new AppBar(
         title: new Text(widget.title),
         actions: [
-          new StoreConnector<AppState,dynamic>(
+          new StoreConnector<AppState,dynamic>( // redux store connector to access logged in state
             converter: (store) => store,
             builder: (context, store){
-              return new ABPopUpMenu(
+              return new ABPopUpMenu( // validate menu content depending on logged in state
                 widget.menuList.where( (menu) => menu.flag==store.state.loggedIn || menu.alwaysOn ).toList(),
                 onSelect: _onSelect,
                 store: store
@@ -149,16 +147,17 @@ class _State extends State<MainPage>{
       ),
       body: new Builder(
         builder: (BuildContext context){
-          _scaffoldContext = context;
-          return new StoreConnector<AppState,bool>(
+          _scaffoldContext = context; //(side effect) store context on global reference
+          return new StoreConnector<AppState,bool>( // access login loading state from redux
             converter: (store) => store.state.loginLoading,
-            builder: (context,loading) => loading ? loader() : _bodyContent
+            builder: (context,loading) => loading ? loader() : _bodyContent // 
           );
         }
       )
     );
   }
   
+  // event when a menu is selected
   _onSelect(MenuAdapter menuItem, store) {
     switch(menuItem.actionId){
       case 0:// Login via Facebook
@@ -186,6 +185,7 @@ class _State extends State<MainPage>{
     }
   }
 
+  // function to redirect to profile page
   _navigateToProfile(){
     Navigator.push(
       context,
@@ -193,6 +193,7 @@ class _State extends State<MainPage>{
     );
   }
 
+  // callback when a new push notification has been received
   _onFirebaseMessage(message){
     generateSnackbar(_scaffoldContext,new Text(message['msg']),10);
   }
